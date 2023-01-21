@@ -1,0 +1,11 @@
+### CREATE NEW PRODUCT
+POST localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "Capa Iphone 13",
+  "price": 100.00,
+  "quantity": 10,
+  "minStock": 5,
+  "unitId": "8045c872-6226-4fcb-a3e3-2c5d3519c31c"
+}
