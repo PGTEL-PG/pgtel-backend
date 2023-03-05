@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:55004/db_teste
+    url: jdbc:postgresql://db:5432/db_pgtel
     username: postgres
     password: postgrespw
   jpa:
