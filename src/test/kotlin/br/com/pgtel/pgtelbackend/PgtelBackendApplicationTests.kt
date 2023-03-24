@@ -8,6 +8,7 @@ class PgtelBackendApplicationTests {
 
     @Test
     fun contextLoads() {
+        println("Teste")
     }
 
 }
