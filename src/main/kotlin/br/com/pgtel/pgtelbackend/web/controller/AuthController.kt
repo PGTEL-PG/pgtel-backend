@@ -30,8 +30,9 @@ class AuthController(
             )
         )
         val userDetails = authentication.principal as UserDetails
+        val token = jwtUtils.generateJwtTokenFromUsername(userDetails.username)
+        return ResponseEntity.ok(LoginResponse("Nome",loginRequest.username, "http://avatar.com.br",token))
 
-        return ResponseEntity.ok(jwtUtils.generateJwtTokenFromUsername(userDetails.username))
     }
 
 
@@ -44,4 +45,11 @@ class AuthController(
 data class LoginRequest(
     val username: String,
     val password: String
+)
+
+data class LoginResponse(
+    val name: String = "Nome",
+    val username: String,
+    val avatar: String? = null,
+    val token: String
 )
