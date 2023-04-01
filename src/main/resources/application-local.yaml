@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_pgtel
+    username: postgres
+    password: postgrespw
+  jpa:
+    database: POSTGRESQL
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8080
+
+pgtel:
+  app:
+    jwtSecret: mySecret
+    jwtExpirationMs: 86400000 # 1 day

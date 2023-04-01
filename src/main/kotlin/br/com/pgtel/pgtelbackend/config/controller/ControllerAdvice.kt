@@ -1,4 +1,4 @@
-package br.com.pgtel.pgtelbackend.web.controller
+package br.com.pgtel.pgtelbackend.config.controller
 
 import br.com.pgtel.pgtelbackend.core.exceptions.BusinessException
 import br.com.pgtel.pgtelbackend.core.exceptions.Error

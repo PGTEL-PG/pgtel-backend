@@ -1,4 +1,4 @@
-package br.com.pgtel.pgtelbackend.web.config.security.jwt
+package br.com.pgtel.pgtelbackend.config.security.jwt
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.servlet.http.HttpServletRequest

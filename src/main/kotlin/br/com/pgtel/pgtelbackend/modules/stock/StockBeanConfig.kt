@@ -1,9 +1,5 @@
-package br.com.pgtel.pgtelbackend.web.config
+package br.com.pgtel.pgtelbackend.modules.stock
 
-import br.com.pgtel.pgtelbackend.modules.auth.gateway.UserGateway
-import br.com.pgtel.pgtelbackend.modules.auth.infrastructure.gateway.DefaultUserGateway
-import br.com.pgtel.pgtelbackend.modules.auth.infrastructure.gateway.jpa.JPAUserRepository
-import br.com.pgtel.pgtelbackend.modules.auth.usecase.createUser.CreateUserUseCase
 import br.com.pgtel.pgtelbackend.modules.stock.gateway.MovementGateway
 import br.com.pgtel.pgtelbackend.modules.stock.gateway.ProductGateway
 import br.com.pgtel.pgtelbackend.modules.stock.gateway.ProductUnitGateway
@@ -28,7 +24,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class BeanConfig {
+class StockBeanConfig {
 
     @Bean
     fun productGateway(
@@ -38,6 +34,7 @@ class BeanConfig {
             jpaProductRepository
         )
     }
+
 
     @Bean
     fun createProductUseCase(productGateway: ProductGateway, unitGateway: ProductUnitGateway): CreateProductUseCase {
@@ -131,21 +128,6 @@ class BeanConfig {
     fun productsStatisticUseCase(productGateway: ProductGateway): ProductsStatisticUseCase {
         return ProductsStatisticUseCase(
             productGateway
-        )
-    }
-
-    @Bean
-    fun userGateway(userRepository: JPAUserRepository): UserGateway {
-        return DefaultUserGateway(
-            userRepository
-        )
-    }
-
-
-    @Bean
-    fun createUserUseCase(userGateway: UserGateway): CreateUserUseCase {
-        return CreateUserUseCase(
-            userGateway
         )
     }
 

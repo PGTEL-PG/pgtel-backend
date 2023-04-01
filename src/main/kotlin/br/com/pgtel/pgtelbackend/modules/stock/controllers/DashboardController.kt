@@ -1,4 +1,4 @@
-package br.com.pgtel.pgtelbackend.web.controller
+package br.com.pgtel.pgtelbackend.modules.stock.controllers
 
 import br.com.pgtel.pgtelbackend.modules.stock.usecase.dashboard.productsStatistic.ProductsStatisticUseCase
 import br.com.pgtel.pgtelbackend.modules.stock.usecase.dashboard.productsStatistic.dto.ProductsStatisticOutputUseCase

@@ -4,9 +4,11 @@ import br.com.pgtel.pgtelbackend.modules.auth.domain.User
 import br.com.pgtel.pgtelbackend.modules.auth.gateway.UserGateway
 import br.com.pgtel.pgtelbackend.modules.auth.usecase.createUser.dto.CreateUserInputUseCase
 import br.com.pgtel.pgtelbackend.modules.auth.usecase.createUser.dto.CreateUserOutputUseCase
+import org.springframework.security.crypto.password.PasswordEncoder
 
 class CreateUserUseCase(
-    private val userGateway: UserGateway
+    private val userGateway: UserGateway,
+    private val passwordEncoder: PasswordEncoder
 ) {
 
     fun execute(input: CreateUserInputUseCase): CreateUserOutputUseCase {
@@ -14,7 +16,7 @@ class CreateUserUseCase(
         val user = User.create(
             name = input.name,
             email = input.email,
-            password = input.password
+            password = passwordEncoder.encode(input.password)
         )
         userGateway.save(user)
         return CreateUserOutputUseCase(
