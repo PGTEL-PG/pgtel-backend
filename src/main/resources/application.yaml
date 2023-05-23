@@ -1,3 +1,14 @@
 spring:
   profiles:
     default: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  web:
+    resources:
+      static-locations: file:/Users/paulo.costa/Documents/pictures
+
+  mvc:
+    static-path-pattern: /static/**

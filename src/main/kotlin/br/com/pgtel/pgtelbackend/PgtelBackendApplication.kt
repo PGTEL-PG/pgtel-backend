@@ -11,6 +11,3 @@ fun main(args: Array<String>) {
     runApplication<PgtelBackendApplication>(*args)
 
 }
-
-
-

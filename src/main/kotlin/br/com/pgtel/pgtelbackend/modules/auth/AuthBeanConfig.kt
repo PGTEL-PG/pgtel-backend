@@ -1,12 +1,12 @@
 package br.com.pgtel.pgtelbackend.modules.auth
 
 import br.com.pgtel.pgtelbackend.config.security.jwt.JwtUtils
-import br.com.pgtel.pgtelbackend.modules.auth.gateway.UserGateway
-import br.com.pgtel.pgtelbackend.modules.auth.infrastructure.gateway.DefaultUserGateway
-import br.com.pgtel.pgtelbackend.modules.auth.infrastructure.gateway.UserDetailsServiceImpl
-import br.com.pgtel.pgtelbackend.modules.auth.infrastructure.gateway.jpa.JPAUserRepository
-import br.com.pgtel.pgtelbackend.modules.auth.usecase.authenticateUser.AuthenticateUser
-import br.com.pgtel.pgtelbackend.modules.auth.usecase.createUser.CreateUserUseCase
+import br.com.pgtel.pgtelbackend.modules.auth.domain.gateway.UserGateway
+import br.com.pgtel.pgtelbackend.modules.auth.infra.gateway.DefaultUserGateway
+import br.com.pgtel.pgtelbackend.modules.auth.infra.gateway.UserDetailsServiceImpl
+import br.com.pgtel.pgtelbackend.modules.auth.infra.gateway.jpa.JPAUserRepository
+import br.com.pgtel.pgtelbackend.modules.auth.domain.usecase.authenticateUser.AuthenticateUser
+import br.com.pgtel.pgtelbackend.modules.auth.domain.usecase.createUser.CreateUserUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager

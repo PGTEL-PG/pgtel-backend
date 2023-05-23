@@ -30,7 +30,6 @@ class AuthTokenFilter : OncePerRequestFilter() {
         filterChain: FilterChain
     ) {
         try {
-            print("aqui estou")
             val jwt: String? = parseJwt(request)
             if (jwt != null && jwtUtils?.validateJwtToken(jwt) == true) {
                 val username: String = jwtUtils.getUsernameFromJwtToken(jwt) ?: ""

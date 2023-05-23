@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
+import org.springframework.security.web.firewall.RequestRejectedException
 import org.springframework.stereotype.Component
 
 
@@ -19,6 +20,7 @@ class AuthEntryPointJwt : AuthenticationEntryPoint {
         response: HttpServletResponse?,
         authException: AuthenticationException
     ) {
+
         logger.error("Unauthorized error: {}", authException.message)
 
         response!!.contentType = MediaType.APPLICATION_JSON_VALUE
@@ -27,7 +29,7 @@ class AuthEntryPointJwt : AuthenticationEntryPoint {
         val body: MutableMap<String, Any> = HashMap()
         body["status"] = HttpServletResponse.SC_UNAUTHORIZED
         body["error"] = "Unauthorized"
-        body["message"] = authException.message?:"Unexpected error"
+        body["message"] = authException.message ?: "Unexpected error"
         body["path"] = request.servletPath
 
         val mapper = ObjectMapper()

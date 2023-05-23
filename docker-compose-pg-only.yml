@@ -1,15 +1,15 @@
 version: '3.8'
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    platform: linux/x86_64
-    restart: always
-    ports:
-      - '8080:8080'
-    depends_on:
-      - db
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    platform: linux/x86_64
+#    restart: always
+#    ports:
+#      - '8080:8080'
+#    depends_on:
+#      - db
   db:
     image: postgres:14.1-alpine
     restart: always

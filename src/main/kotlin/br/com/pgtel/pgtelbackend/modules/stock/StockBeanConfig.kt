@@ -1,25 +1,21 @@
 package br.com.pgtel.pgtelbackend.modules.stock
 
-import br.com.pgtel.pgtelbackend.modules.stock.gateway.MovementGateway
-import br.com.pgtel.pgtelbackend.modules.stock.gateway.ProductGateway
-import br.com.pgtel.pgtelbackend.modules.stock.gateway.ProductUnitGateway
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.DefaultMovementGateway
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.DefaultProductGateway
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.DefaultProductUnitGateway
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.jpa.JPAMovementRepository
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.jpa.JPAProductRepository
-import br.com.pgtel.pgtelbackend.modules.stock.infrastructure.gateway.jpa.JPAProductUnitRepository
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.dashboard.productsStatistic.ProductsStatisticUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.movement.create.CreateMovementUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.movement.delete.DeleteMovementUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.movement.findPageable.FindPageableMovementUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.product.create.CreateProductUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.product.delete.DeleteProductByIdUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.product.findById.FindProductByIdUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.product.findPageable.FindProductsPageableUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.productUnit.create.CreateProductUnitUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.productUnit.delete.DeleteUnitByIdUseCase
-import br.com.pgtel.pgtelbackend.modules.stock.usecase.productUnit.findAll.FindAllProductUnitsUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.FileUploaderGateway
+import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.MovementGateway
+import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.ProductGateway
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.delete.DeleteMovementUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.findPageable.FindPageableMovementUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.create.CreateProductUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.delete.DeleteProductByIdUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.findById.FindProductByIdUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.findPageable.FindProductsPageableUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.update.UpdateProductUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.uploadImage.UploadProductImageUseCase
+import br.com.pgtel.pgtelbackend.modules.stock.infra.gateway.DefaultMovementGateway
+import br.com.pgtel.pgtelbackend.modules.stock.infra.gateway.DefaultProductGateway
+import br.com.pgtel.pgtelbackend.modules.stock.infra.gateway.LocalFileUploaderGateway
+import br.com.pgtel.pgtelbackend.modules.stock.infra.gateway.jpa.JPAMovementRepository
+import br.com.pgtel.pgtelbackend.modules.stock.infra.gateway.jpa.JPAProductRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -35,12 +31,10 @@ class StockBeanConfig {
         )
     }
 
-
     @Bean
-    fun createProductUseCase(productGateway: ProductGateway, unitGateway: ProductUnitGateway): CreateProductUseCase {
+    fun createProductUseCase(productGateway: ProductGateway): CreateProductUseCase {
         return CreateProductUseCase(
             productGateway,
-            unitGateway
         )
     }
 
@@ -65,34 +59,6 @@ class StockBeanConfig {
         )
     }
 
-    @Bean
-    fun productUnitGateway(jpaProductUnitRepository: JPAProductUnitRepository): ProductUnitGateway {
-        return DefaultProductUnitGateway(
-            jpaProductUnitRepository
-        )
-    }
-
-    @Bean
-    fun createProductUnitUseCase(gateway: ProductUnitGateway): CreateProductUnitUseCase {
-        return CreateProductUnitUseCase(
-            gateway
-        )
-    }
-
-    @Bean
-    fun findAllProductUnitsUseCase(gateway: ProductUnitGateway): FindAllProductUnitsUseCase {
-        return FindAllProductUnitsUseCase(
-            gateway
-        )
-    }
-
-    @Bean
-    fun deleteUnitByIdUseCase(gateway: ProductUnitGateway): DeleteUnitByIdUseCase {
-        return DeleteUnitByIdUseCase(
-            gateway
-        )
-    }
-
 
     @Bean
     fun movementGateway(jpaMovementRepository: JPAMovementRepository): MovementGateway {
@@ -109,8 +75,11 @@ class StockBeanConfig {
     }
 
     @Bean
-    fun createMovementUseCase(productGateway: ProductGateway, movementGateway: MovementGateway): CreateMovementUseCase {
-        return CreateMovementUseCase(
+    fun createMovementUseCase(
+        productGateway: ProductGateway,
+        movementGateway: MovementGateway
+    ): br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.create.CreateMovementUseCase {
+        return br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.create.CreateMovementUseCase(
             productGateway,
             movementGateway
         )
@@ -125,9 +94,32 @@ class StockBeanConfig {
     }
 
     @Bean
-    fun productsStatisticUseCase(productGateway: ProductGateway): ProductsStatisticUseCase {
-        return ProductsStatisticUseCase(
+    fun productsStatisticUseCase(productGateway: ProductGateway): br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.dashboard.productsStatistic.ProductsStatisticUseCase {
+        return br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.dashboard.productsStatistic.ProductsStatisticUseCase(
             productGateway
+        )
+    }
+
+    @Bean
+    fun updateProductUseCase(productGateway: ProductGateway): UpdateProductUseCase {
+        return UpdateProductUseCase(
+            productGateway
+        )
+    }
+
+    @Bean
+    fun fileUploaderGateway(): FileUploaderGateway {
+        return LocalFileUploaderGateway()
+    }
+
+    @Bean
+    fun uploadProductImageUseCase(
+        productGateway: ProductGateway,
+        fileUploaderGateway: FileUploaderGateway
+    ): UploadProductImageUseCase {
+        return UploadProductImageUseCase(
+            productGateway,
+            fileUploaderGateway
         )
     }
 
