@@ -8,9 +8,8 @@ plugins {
 }
 
 group = 'br.com.pgtel'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '17'
-
 repositories {
     mavenCentral()
 }
@@ -37,10 +36,6 @@ tasks.withType(KotlinCompile).configureEach {
         freeCompilerArgs = ['-Xjsr305=strict']
         jvmTarget = '17'
     }
-}
-
-jar {
-    archiveFileName = 'pgtel-api.jar'
 }
 
 

@@ -1,11 +1,13 @@
+# Estágio 1: Construção da aplicação
 FROM gradle:7.4-jdk17 AS builder
-WORKDIR /opt/app
+WORKDIR /app
 COPY build.gradle settings.gradle ./
-COPY ./src ./src
-RUN gradle bootJar
+COPY src ./src
+RUN gradle build --no-daemon
 
+# Estágio 2: Imagem de tempo de execução
 FROM openjdk:17-jdk-slim AS runner
-WORKDIR /opt/app
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar ./app.jar
 EXPOSE 8080
-COPY --from=builder /opt/app/build/libs/pgtel-api.jar /opt/app/app.jar
-ENTRYPOINT ["java", "-jar", "/opt/app/app.jar" ]
+ENTRYPOINT ["java", "-jar", "app.jar"]
