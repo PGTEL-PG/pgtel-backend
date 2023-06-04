@@ -33,7 +33,6 @@ class MovementEntity {
     }
 
     constructor() {
-
     }
 
 

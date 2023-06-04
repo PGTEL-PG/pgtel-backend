@@ -8,7 +8,7 @@ interface ProductGateway {
 
     fun save(product: Product)
     fun findById(id: UUID): Product?
-    fun findProductsPageable(page: Int, size: Int, name: String?): Page<Product>
+    fun findProductsPageable(page: Int, size: Int, name: String? = null): Page<Product>
     fun countAll(): Int
     fun countAllOutOfStock(): Int
     fun countAllInStockWithHighQuantity(): Int

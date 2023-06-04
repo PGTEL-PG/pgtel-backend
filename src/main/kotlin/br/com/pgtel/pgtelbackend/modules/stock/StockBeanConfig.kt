@@ -3,6 +3,7 @@ package br.com.pgtel.pgtelbackend.modules.stock
 import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.FileUploaderGateway
 import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.MovementGateway
 import br.com.pgtel.pgtelbackend.modules.stock.domain.gateway.ProductGateway
+import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.dashboard.productsStatistic.ProductsStatisticUseCase
 import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.delete.DeleteMovementUseCase
 import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.movement.findPageable.FindPageableMovementUseCase
 import br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.product.create.CreateProductUseCase
@@ -94,9 +95,13 @@ class StockBeanConfig {
     }
 
     @Bean
-    fun productsStatisticUseCase(productGateway: ProductGateway): br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.dashboard.productsStatistic.ProductsStatisticUseCase {
-        return br.com.pgtel.pgtelbackend.modules.stock.domain.usecase.dashboard.productsStatistic.ProductsStatisticUseCase(
-            productGateway
+    fun productsStatisticUseCase(
+        productGateway: ProductGateway,
+        movementGateway: MovementGateway
+    ): ProductsStatisticUseCase {
+        return ProductsStatisticUseCase(
+            productGateway,
+            movementGateway
         )
     }
 
