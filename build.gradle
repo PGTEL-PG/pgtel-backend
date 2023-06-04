@@ -39,6 +39,10 @@ tasks.withType(KotlinCompile).configureEach {
     }
 }
 
+jar {
+    archiveFileName = 'pgtel-api.jar'
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()
