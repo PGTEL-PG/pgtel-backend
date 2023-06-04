@@ -7,5 +7,5 @@ RUN gradle bootJar
 FROM openjdk:17-jdk-slim AS runner
 WORKDIR /opt/app
 EXPOSE 8080
-COPY --from=builder /opt/app/build/libs/*.jar /opt/app/*.jar
+COPY --from=builder /opt/app/build/libs/*.jar /opt/app/
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar" ]
