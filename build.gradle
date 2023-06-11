@@ -25,7 +25,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:9.5.1'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     runtimeOnly 'org.postgresql:postgresql:42.5.1'
-    runtimeOnly 'com.h2database:h2:2.1.214'
+    testImplementation 'com.h2database:h2:2.1.214'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.0'
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
@@ -44,5 +44,5 @@ tasks.named('test') {
 }
 
 bootJar {
-    archiveFileName = 'api.jar'
+    archiveFileName = 'pgtel-backend.jar'
 }

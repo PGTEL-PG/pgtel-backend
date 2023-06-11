@@ -98,7 +98,7 @@ class UserEntity : UserDetails {
             password = password!!,
             avatar = avatar!!,
             createdAt = createdAt,
-            updatedAt = updatedAt!!,
+            updatedAt = updatedAt,
             deletedAt = deletedAt,
         )
     }
